@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: explore-forge-jira-custom-field-patterns
+  title: Explore Forge Jira Custom Field Patterns
+  description: Forge app exploring Jira custom-field UI Kit patterns.
+  annotations:
+    forge-ranch/package-name: explore-forge-jira-custom-field-patterns
+    forge-ranch/license: Apache-2.0
+    forge-ranch/copyright-date: "2026"
+spec:
+  type: forge-app
+  lifecycle: experimental
+  owner: user:default/ibuchanan

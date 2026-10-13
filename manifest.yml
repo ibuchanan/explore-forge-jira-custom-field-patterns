@@ -1,0 +1,32 @@
+modules:
+  jira:customField:
+    - key: explore-forge-jira-custom-field-patterns-custom-field-ui-kit-2-hello-world
+      name: explore-forge-jira-custom-field-patterns
+      description: A hello world custom field.
+      type: string
+      view:
+        render: native
+        resource: main
+        experience:
+          - issue-view
+          - portal-view
+      edit:
+        resource: edit
+        render: native
+        isInline: true
+        experience:
+          - issue-create
+          - issue-transition
+          - issue-view
+          - portal-request
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+  - key: edit
+    path: src/frontend/edit.jsx
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/ac80f21a-e4da-464f-829e-3f3516df3000
