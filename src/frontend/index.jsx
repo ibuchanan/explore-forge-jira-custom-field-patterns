@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import ForgeReconciler, {
-  Text,
-} from "@forge/react";
-import { view } from '@forge/bridge';
+import React, { useState, useEffect } from "react";
+import ForgeReconciler, { Text } from "@forge/react";
+import { view } from "@forge/bridge";
 
 const View = () => {
   const [fieldValue, setFieldValue] = useState(null);
 
   useEffect(() => {
-    view.getContext().then((context) => { setFieldValue(context.extension.fieldValue) });
+    view.getContext().then((context) => {
+      setFieldValue(context.extension.fieldValue);
+    });
   }, []);
 
   return (
     <>
-      <Text>{`Hello ${fieldValue || 'world'}!`}</Text>
+      <Text>{`Hello ${fieldValue || "world"}!`}</Text>
     </>
   );
 };
@@ -21,5 +21,5 @@ const View = () => {
 ForgeReconciler.render(
   <React.StrictMode>
     <View />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

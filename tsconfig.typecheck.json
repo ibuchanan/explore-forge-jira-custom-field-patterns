@@ -13,19 +13,8 @@
     "rootDir": ".",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "src",
-    "test",
-    "tests"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "coverage",
-    "specs"
-  ]
+  "include": ["src", "test", "tests"],
+  "exclude": ["node_modules", "dist", "coverage", "specs"]
 }

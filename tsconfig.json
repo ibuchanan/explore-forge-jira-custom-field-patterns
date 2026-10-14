@@ -19,9 +19,7 @@
     /* Output: The bundler handles this via a temporary directory, but 'dist' is the standard placeholder */
     "outDir": "dist",
     "rootDir": "src",
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
   "include": ["src"]
 }
