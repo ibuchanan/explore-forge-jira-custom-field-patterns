@@ -1,29 +1,24 @@
 modules:
   jira:customField:
-    - key: explore-forge-jira-custom-field-patterns-custom-field-ui-kit-2-hello-world
-      name: explore-forge-jira-custom-field-patterns
-      description: A hello world custom field.
-      type: string
+    - key: number-in-words
+      name: Number in words
+      description: A whole number stored numerically and displayed as English words.
+      type: number
       view:
         render: native
-        resource: main
+        resource: number-words-view
         experience:
           - issue-view
           - portal-view
       edit:
-        resource: edit
-        render: native
-        isInline: true
-        experience:
-          - issue-create
-          - issue-transition
-          - issue-view
-          - portal-request
+        validation:
+          expression: >-
+            value == null || (value >= -9007199254740991 &&
+            value <= 9007199254740991 && value % 1 == 0)
+          errorMessage: Enter a whole number between -9007199254740991 and 9007199254740991.
 resources:
-  - key: main
-    path: src/frontend/index.jsx
-  - key: edit
-    path: src/frontend/edit.jsx
+  - key: number-words-view
+    path: src/frontend/index.tsx
 app:
   runtime:
     name: nodejs24.x
