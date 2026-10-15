@@ -1,51 +1,105 @@
-> Please remove this quote block and replace the others with meaningful content. If you're looking at this on Bitbucket, be assured that it looks great on GitHub.
+# Explore Forge Jira Custom Field Patterns
 
-# ranch-rig-drop-calf
+[![Atlassian license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
-[![Atlassian license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
+Experimental Atlassian Forge apps demonstrating Jira custom-field patterns
+with UI Kit. Each directory under `apps/` is a separate Forge app with its
+own manifest, runtime dependencies, and TypeScript configuration. Use an app
+in this npm workspace or copy it out as a starting point for your own app.
 
-> Provide an introduction/overview of your project, and articulate the problem it solves for the broader engineering community. Potential consumers should understand **what** the project is, and **why** it exists.
+| App | Pattern |
+| --- | --- |
+| [render-number-words](apps/render-number-words) | Store a whole number and display it as English words, such as `42` → `forty-two`. |
 
-> Other recommended badges are a [version](https://shields.io/category/version) badge (e.g. `npm`) and a [build](https://shields.io/category/build) badge (e.g., `circleci` or `travis`). Order should be `license - version - build - PRs`. Please use the `flat-sqare` style.
->
-> See e.g.
->
-> [![npm version](https://img.shields.io/npm/v/react-beautiful-dnd.svg?style=flat-square)](https://www.npmjs.com/package/react-beautiful-dnd) [![npm version](https://img.shields.io/npm/v/@atlaskit/button.svg?style=flat-square)](https://www.npmjs.com/package/@atlaskit/button) [![Build Status](https://img.shields.io/travis/stricter/stricter/master?style=flat-square)](https://travis-ci.org/stricter/stricter)
+## Prerequisites
 
+- Node.js 24 and npm, matching [`.nvmrc`](.nvmrc).
+- The [Forge CLI](https://developer.atlassian.com/platform/forge/getting-started/)
+  and an Atlassian account.
+- A Jira Cloud development site where you can install apps.
 
-## Usage
+Install the CLI and authenticate with an Atlassian API scoped token:
 
-> Provide a simple and concise (code) example of your project. Consumers should understand **how** your project solves their problem.
+```sh
+npm install --global @forge/cli
+forge login
+```
 
-## Installation
+## Try an app in this repository
 
-> Provide instructions on how to install and configure the project.
+Install dependencies from the repository root, then enter the app directory:
 
-## Documentation
+```sh
+npm install
+cd apps/render-number-words
+```
 
-> If your project is small and simple enough, documentation can be added here. For larger projects, provide a link to where the documentation lives.
+Run the registration, deployment, and installation commands below from this
+app directory, not from the repository root.
 
-## Tests
+## Copy an app into its own project
 
-> Describe and show how to run the tests with code examples.
+Each app can be copied out; the other apps and root workspace are not needed
+at runtime. From a clean source checkout at the repository root, for example:
 
-## Contributions
+```sh
+cp -R apps/render-number-words ../my-number-words-app
+cp LICENSE .npmrc ../my-number-words-app/
+cd ../my-number-words-app
+npm install
+```
 
-Contributions to ranch-rig-drop-calf are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Copy the source directory, not any generated `node_modules/`, `dist/`, or
+`coverage/` directories. Each app declares its runtime dependencies locally.
+Build, test, and size-check tools are shared at the monorepo root; install
+the needed development tools in your copy using the
+[standalone development instructions](DEVELOPMENT.md#standalone-development).
+Your copy will have its own lockfile after `npm install`.
+
+## Register, deploy, and install
+
+From the selected app directory or standalone copy, register your own app
+**once**:
+
+```sh
+forge register
+```
+
+Registration writes a new `app.id` into `manifest.yml`. Do not deploy using
+the sample's existing ID. Skip registration if you already registered this
+app yourself: registering again creates a new app identity rather than
+updating the existing one, with separate environments, storage, and installs.
+
+Deploy the app, then install it on your Jira site. Replace
+`example.atlassian.net` with your site hostname:
+
+```sh
+forge deploy --environment development
+forge install --site example.atlassian.net --product jira --environment development
+```
+
+Deployment uploads the app; installation makes it available on that site.
+Review any requested permissions before accepting the installation. For
+`render-number-words`, a Jira administrator can then create a custom field
+using the **Number in words** field type and add it to an issue screen.
+
+For later code changes, rerun `forge deploy --environment development`.
+If you change scopes, deploy and then upgrade the existing installation:
+
+```sh
+forge install --upgrade --site example.atlassian.net --product jira --environment development
+```
+
+See the [Forge CLI reference](https://developer.atlassian.com/platform/forge/cli-reference/)
+for more commands.
+
+## Development and contributions
+
+Run `npm run check` from the repository root to verify all apps. See
+[DEVELOPMENT.md](DEVELOPMENT.md) for workspace commands and standalone tools,
+and [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution process.
 
 ## License
 
-Copyright (c) [YYYY] Atlassian US., Inc.
-Apache 2.0 licensed, see [LICENSE](LICENSE) file.
-
-<br/>
-
-> Pick one of the following:
-
-[![With ❤️ from Atlassian](https://raw.githubusercontent.com/atlassian-internal/oss-assets/master/banner-cheers.png)](https://www.atlassian.com)
-
-[![With ❤️ from Atlassian](https://raw.githubusercontent.com/atlassian-internal/oss-assets/master/banner-with-thanks.png)](https://www.atlassian.com)
-
-[![With ❤️ from Atlassian](https://raw.githubusercontent.com/atlassian-internal/oss-assets/master/banner-with-thanks-light.png)](https://www.atlassian.com)
-
-[![With ❤️ from Atlassian](https://raw.githubusercontent.com/atlassian-internal/oss-assets/master/banner-cheers-light.png)](https://www.atlassian.com)
+Apache 2.0 licensed. See [LICENSE](LICENSE).

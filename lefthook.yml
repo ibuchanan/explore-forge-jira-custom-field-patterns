@@ -4,20 +4,6 @@ output:
   - summary
   - failure
 
-lint:
-  parallel: true
-  commands:
-    prelint:
-      run: npm run lint:prelint --if-present
-    biome:
-      run: npm run lint:check
-    forge:
-      run: npm run lint:forge --if-present
-    typecheck:
-      run: npm run typecheck
-    format:
-      run: npm run format:check
-
 pre-commit:
   parallel: true
   commands:
@@ -33,11 +19,6 @@ pre-commit:
       stage_fixed: true
 
 pre-push:
-  parallel: true
   commands:
-    lint:
-      run: npm run lint
-    test:
-      run: npm run test --if-present
-    size:
-      run: npm run size:check
+    check:
+      run: npm run check

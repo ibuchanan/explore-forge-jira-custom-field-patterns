@@ -1,0 +1,29 @@
+{
+  "name": "render-number-words",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Forge app exploring Jira custom-field UI Kit patterns.",
+  "license": "Apache-2.0",
+  "author": "ibuchanan",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "clean": "rm -rf dist",
+    "lint": "forge lint",
+    "size:check": "npm run build && size-limit",
+    "test": "vitest run",
+    "typecheck": "tsc --project tsconfig.typecheck.json --noEmit"
+  },
+  "dependencies": {
+    "@forge/react": "^12.3.1",
+    "number-to-words": "^1.2",
+    "react": "^18.3.1"
+  },
+  "size-limit": [
+    {
+      "name": "Forge app bundle",
+      "path": "dist/**/*.js",
+      "limit": "10 kB"
+    }
+  ]
+}
