@@ -1,0 +1,36 @@
+{
+  "name": "backend-numericid",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Forge app exploring Jira custom-field UI Kit patterns.",
+  "license": "Apache-2.0",
+  "author": "ibuchanan",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "clean": "rm -rf dist",
+    "lint": "forge lint",
+    "size:check": "npm run build && size-limit",
+    "test": "vitest run",
+    "typecheck": "tsc --project tsconfig.typecheck.json --noEmit"
+  },
+  "dependencies": {
+    "@forge-ahead/dummyjson": "github:ibuchanan/forge-ahead-dummyjson",
+    "@forge/api": "^8.3.0",
+    "@forge/bridge": "^7.2.0",
+    "@forge/react": "^12.3.1",
+    "@forge/resolver": "^2.0.1",
+    "react": "^18.3.1"
+  },
+  "size-limit": [
+    {
+      "name": "Forge app bundle",
+      "path": "dist/**/*.js",
+      "limit": "10 kB"
+    }
+  ],
+  "devDependencies": {
+    "@types/react-test-renderer": "^18.3.1",
+    "react-test-renderer": "^18.3.1"
+  }
+}

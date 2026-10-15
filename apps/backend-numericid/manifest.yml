@@ -1,0 +1,46 @@
+modules:
+  jira:customField:
+    - key: number-in-words
+      name: Product
+      description: A DummyJSON product stored as its numeric ID.
+      type: number
+      resolver:
+        function: products
+      view:
+        render: native
+        resource: number-words-view
+        experience:
+          - issue-view
+          - portal-view
+      edit:
+        resource: number-words-view
+        render: native
+        isInline: true
+        experience:
+          - issue-view
+          - issue-create
+          - issue-transition
+          - portal-request
+        validation:
+          expression: >-
+            value == null || (value > 0 &&
+            value <= 9007199254740991 && value % 1 == 0)
+          errorMessage: Select a product with a positive whole-number ID.
+  function:
+    - key: products
+      handler: index.handler
+permissions:
+  external:
+    fetch:
+      backend:
+        - address: https://dummyjson.com
+          inScopeEUD: false
+resources:
+  - key: number-words-view
+    path: src/frontend/index.tsx
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/ac80f21a-e4da-464f-829e-3f3516df3000
