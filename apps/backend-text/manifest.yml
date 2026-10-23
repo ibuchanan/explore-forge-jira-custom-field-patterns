@@ -1,0 +1,27 @@
+modules:
+  jira:customField:
+    - key: number-in-words
+      name: Number in words
+      description: A whole number stored numerically and displayed as English words.
+      type: number
+      view:
+        render: native
+        resource: number-words-view
+        experience:
+          - issue-view
+          - portal-view
+      edit:
+        validation:
+          expression: >-
+            value == null || (value >= -9007199254740991 &&
+            value <= 9007199254740991 && value % 1 == 0)
+          errorMessage: Enter a whole number between -9007199254740991 and 9007199254740991.
+resources:
+  - key: number-words-view
+    path: src/frontend/index.tsx
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/ac80f21a-e4da-464f-829e-3f3516df3000
