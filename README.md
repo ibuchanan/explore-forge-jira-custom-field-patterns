@@ -8,9 +8,13 @@ with UI Kit. Each directory under `apps/` is a separate Forge app with its
 own manifest, runtime dependencies, and TypeScript configuration. Use an app
 in this npm workspace or copy it out as a starting point for your own app.
 
+<!-- cspell:words numericid -->
+
 | App | Pattern |
 | --- | --- |
-| [render-number-words](apps/render-number-words) | Store a whole number and display it as English words, such as `42` → `forty-two`. |
+| [render-number-words](apps/render-number-words/README.md) | Store a whole number and display it as English words, such as `42` → `forty-two`. |
+| [backend-numericid](apps/backend-numericid/README.md) | Choose a DummyJSON product by title through a backend resolver; store only its numeric ID. |
+| [backend-text](apps/backend-text/README.md) | Currently a copy of the local number-to-words example, with no backend resolver or text-valued storage. |
 
 ## Prerequisites
 
